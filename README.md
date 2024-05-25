@@ -1,0 +1,1 @@
+# stan-js Angular adapter

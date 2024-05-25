@@ -1,0 +1,50 @@
+{
+	"name": "@ceski23/stan-js-angular",
+	"author": "Cezary Bober",
+	"license": "MIT",
+	"version": "1.0.0",
+	"repository": "https://github.com/ceski23/stan-js-angular",
+	"description": "",
+	"type": "module",
+	"main": "./dist/index.cjs",
+	"exports": {
+		".": {
+			"module": "./dist/index.mjs",
+			"import": {
+				"types": "./dist/index.d.mts",
+				"default": "./dist/index.mjs"
+			},
+			"require": {
+				"types": "./dist/index.d.cts",
+				"default": "./dist/index.cjs"
+			},
+			"default": "./dist/index.cjs"
+		}
+	},
+	"scripts": {
+		"prepare": "husky",
+		"build": "unbuild --minify",
+		"check:config": "attw --pack . && publint",
+		"test": "bun test",
+		"lint": "dprint check",
+		"prepublishOnly": "bun install && bun run build"
+	},
+	"sideEffects": false,
+	"files": [
+		"dist"
+	],
+	"peerDependencies": {
+		"@angular/core": ">=17",
+		"@angular/common": ">=17",
+		"stan-js": ">=1.2.0"
+	},
+	"devDependencies": {
+		"@arethetypeswrong/cli": "^0.15.3",
+		"@types/bun": "^1.1.3",
+		"dprint": "^0.45.1",
+		"husky": "^9.0.11",
+		"publint": "^0.2.8",
+		"typescript": "^5.4.5",
+		"unbuild": "^2.0.0"
+	}
+}
