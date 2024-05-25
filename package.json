@@ -30,6 +30,9 @@
 		"prepublishOnly": "bun install && bun run build"
 	},
 	"sideEffects": false,
+	"publishConfig": {
+		"access": "public"
+	},
 	"files": [
 		"dist"
 	],
