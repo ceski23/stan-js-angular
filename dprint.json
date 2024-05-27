@@ -3,6 +3,7 @@
 		"https://raw.githubusercontent.com/ceski23/dprint-config/v0.1/dprint.json"
 	],
 	"excludes": [
-		"dist"
+		"dist",
+		".angular"
 	]
 }
