@@ -21,12 +21,12 @@ bun add stan-js
 
 Create a store with initial state:
 
-You can think of a store as your app state. You can define multiple keys/values, each key will be available to use as [signal](https://angular.dev/guide/signals). By adding a getter to the state object, you can have a computed state that manipulates values from the state. Remember to import `createStore` function from `'stan-js/vanilla'`
+You can think of a store as your app state. You can define multiple keys/values, each key will be available to use as [signal](https://angular.dev/guide/signals). By adding a getter to the state object, you can have a computed state that manipulates values from the state. Remember to import `createStore` function from `@ceski23/stan-js-angular`
 
 ```typescript
-import { createStore } from 'stan-js/vanilla'
+import { createStore } from '@ceski23/stan-js-angular'
 
-export const store = createStore({
+export const appStore = createStore({
 	counter: 0,
 	textField: 'Hello World!',
 	currentTime: new Date(),
@@ -36,30 +36,44 @@ export const store = createStore({
 })
 ```
 
-To use store in your component use `injectStore` function from `'@ceski23/stan-js-angular'`. 
+To use store in your app firstly you need to provide it:
+```typescript
+import { appStore } from './store'
+
+@Component({
+	// ...
+	providers: [
+		appStore.provideStore(),
+	],
+	// ...
+})
+```
+
+and then you can inject store or state: 
 
 ```typescript
-state = injectStore(store)
+store = appStore.injectStore()
+state = appStore.injectStoreState()
 ```
 
 To read state value simply call each signal: 
 
 ```typescript
-state.counter()
+this.state.counter()
 ```
 
 To update state field value use signal method's like `set()` or `update()`: 
 
 ```typescript
-state.counter.update(counter => counter + 1)
-state.counter.set(0)
+this.state.counter.update(counter => counter + 1)
+this.state.counter.set(0)
 ```
 You can also reset state field to initial value by calling `reset()` function on `store` object providing state field name as argument:
 
 ```typescript
-store.reset('counter')
+this.store.reset('counter')
 ```
-You can find full usage examle in [this section](#example).
+You can find full usage example in [this section](#example).
 
 ## Example
 

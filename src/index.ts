@@ -83,19 +83,14 @@ const mergeState = <TState extends object>(state: TState, partialState: Partial<
 	return newState
 }
 
-export const createStore = <TState extends object>(storeName: string, initialState: TState) => {
-	const STORE_INJECTION_TOKEN = new InjectionToken<Store<TState>>(`stan-js-angular.${storeName}`)
+export const createStore = <TState extends object>(initialState: TState) => {
+	const STORE_INJECTION_TOKEN = new InjectionToken<Store<TState>>('stan-js-angular')
 
 	// The provideStore function is a factory function that provides a store instance to the Angular DI system.
 	const provideStore = (overridedState?: Partial<Omit<TState, GetReadonlyKeys<TState>>>): Provider => ({
 		provide: STORE_INJECTION_TOKEN,
-		useFactory: () => {
-			// Create a new state object by merging the initial state with the overrided state
-			const newState = mergeState(initialState, overridedState ?? {})
-
-			return createStoreVanilla<TState>(newState)
-		},
-		deps: [],
+		// Create a new state object by merging the initial state with the overrided state
+		useFactory: () => createStoreVanilla<TState>(mergeState(initialState, overridedState ?? {})),
 	})
 	const injectStore = (): Store<TState> => inject(STORE_INJECTION_TOKEN)
 	const injectStoreState = () => injectState(injectStore())
