@@ -1,9 +1,8 @@
 import { CommonModule } from '@angular/common'
 import { ChangeDetectionStrategy, Component, effect, ElementRef, inject } from '@angular/core'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
-import { injectStore } from '@ceski23/stan-js-angular'
 import { animateChange } from '../../utils/animateStateChanged'
-import { store } from '../store'
+import { injectStore, injectStoreState } from '../store'
 
 @Component({
 	selector: 'app-text-field',
@@ -29,10 +28,11 @@ import { store } from '../store'
 })
 export class TextFieldComponent {
 	elementRef = inject(ElementRef)
-	state = injectStore(store)
+	store = injectStore()
+	state = injectStoreState()
 
 	reset() {
-		store.reset('textField')
+		this.store.reset('textField')
 	}
 
 	updateValue(value: string) {

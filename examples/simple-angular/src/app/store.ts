@@ -1,7 +1,8 @@
-import { createStore } from 'stan-js/vanilla'
+import { createStore } from '@ceski23/stan-js-angular'
+import { storage } from 'stan-js/storage'
 
-export const store = createStore({
-	counter: 0,
+export const { injectStore, injectStoreState, provideStore } = createStore('store', {
+	counter: storage(0),
 	textField: 'Hello World!',
 	currentTime: new Date(),
 	get upperCaseTextField() {

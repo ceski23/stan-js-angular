@@ -1,10 +1,9 @@
 import { CommonModule } from '@angular/common'
 import { ChangeDetectionStrategy, Component, effect, ElementRef, inject, signal } from '@angular/core'
 import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop'
-import { injectStore } from '@ceski23/stan-js-angular'
 import { interval, switchMap, tap } from 'rxjs'
 import { animateChange } from '../../utils/animateStateChanged'
-import { store } from '../store'
+import { injectStoreState } from '../store'
 
 @Component({
 	selector: 'app-current-time',
@@ -17,7 +16,7 @@ import { store } from '../store'
       <div class="pill-group">
         <button class="pill" (click)="updateTimePeriod(1000)">slow down</button>
         <button class="pill" (click)="updateTimePeriod(-1000)">speed up</button>
-				 <h3>refresh rate: {{timePeriod()}} ms</h3> 
+				 <h3>refresh rate: {{timePeriod()}} ms</h3>
       </div>
       <div class="time-state">
         <h2 class="text-color">time:</h2>
@@ -28,7 +27,7 @@ import { store } from '../store'
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CurrentTimeComponent {
-	state = injectStore(store)
+	state = injectStoreState()
 	elementRef = inject(ElementRef)
 	timePeriod = signal(1000)
 	timer = toObservable(this.timePeriod).pipe(

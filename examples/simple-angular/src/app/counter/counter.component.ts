@@ -1,8 +1,7 @@
 import { CommonModule } from '@angular/common'
 import { ChangeDetectionStrategy, Component, effect, ElementRef, inject } from '@angular/core'
-import { injectStore } from '@ceski23/stan-js-angular'
 import { animateChange } from '../../utils/animateStateChanged'
-import { store } from '../store'
+import { injectStore, injectStoreState } from '../store'
 
 @Component({
 	selector: 'app-counter',
@@ -25,7 +24,8 @@ import { store } from '../store'
 })
 export class CounterComponent {
 	elementRef = inject(ElementRef)
-	state = injectStore(store)
+	store = injectStore()
+	state = injectStoreState()
 
 	increment() {
 		this.state.counter.update(counter => counter + 1)
@@ -35,7 +35,7 @@ export class CounterComponent {
 	}
 
 	reset() {
-		store.reset('counter')
+		this.store.reset('counter')
 	}
 
 	constructor() {
