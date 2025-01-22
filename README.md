@@ -81,3 +81,5 @@ You can find full usage example in [this section](#example).
 )](https://github.com/ceski23/stan-js-angular/tree/master/examples/simple-angular)
 [![Open in StackBlitz](https://img.shields.io/badge/Stackblitz-fff?style=for-the-badge&logo=stackblitz&logoColor=white&labelColor=%231374EF&color=%231374EF
 )](https://stackblitz.com/github/ceski23/stan-js-angular/tree/master/examples/simple-angular?preset=node)
+
+[![Open in Codeanywhere](https://codeanywhere.com/img/open-in-codeanywhere-btn.svg)](https://app.codeanywhere.com/#https://github.com/ceski23/stan-js-angular/tree/master/examples/simple-angular)
